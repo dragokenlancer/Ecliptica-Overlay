@@ -1,0 +1,62 @@
+<Window x:Class="EclipticaOverlay.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ecliptica Overlay — Chatbox Settings"
+        Width="540" Height="680"
+        WindowStartupLocation="CenterOwner"
+        Background="#15151A">
+
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <TextBlock Text="VRChat Chatbox" Foreground="#E8EAF0" FontSize="16" FontWeight="Bold" Margin="0,0,0,8"/>
+
+                <CheckBox x:Name="EnabledCheckBox" Content="Send status to VRChat chatbox (OSC)"
+                          Foreground="#CCD0DA" Margin="0,0,0,6"/>
+                <CheckBox x:Name="NotifyCheckBox" Content="Play chatbox notification sound on update"
+                          Foreground="#CCD0DA" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Minimum seconds between updates" Foreground="#8A90A0" FontSize="11" Margin="0,0,0,3"/>
+                <TextBox x:Name="IntervalBox" Width="80" HorizontalAlignment="Left" Margin="0,0,0,18"
+                         Padding="4,3"/>
+
+                <TextBlock Text="Templates" Foreground="#E8EAF0" FontSize="16" FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBlock Foreground="#8A90A0" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,12"
+                           Text="Wrap a key in curly braces to insert live data, e.g. {Boss}. Each state below only sends while you're in it. See the key reference at the bottom."/>
+
+                <TextBlock Text="Lobby" Foreground="#7FB2E5" FontSize="12" FontWeight="Bold" Margin="0,0,0,3"/>
+                <TextBox x:Name="LobbyTemplateBox" Margin="0,0,0,12" Padding="6,4" TextWrapping="Wrap"/>
+
+                <TextBlock Text="Stage" Foreground="#4CC38A" FontSize="12" FontWeight="Bold" Margin="0,0,0,3"/>
+                <TextBox x:Name="StageTemplateBox" Margin="0,0,0,12" Padding="6,4" TextWrapping="Wrap"/>
+
+                <TextBlock Text="Boss Fight" Foreground="#E5555F" FontSize="12" FontWeight="Bold" Margin="0,0,0,3"/>
+                <TextBox x:Name="BossTemplateBox" Margin="0,0,0,12" Padding="6,4" TextWrapping="Wrap"/>
+
+                <TextBlock Text="Intermission" Foreground="#E5A93C" FontSize="12" FontWeight="Bold" Margin="0,0,0,3"/>
+                <TextBox x:Name="IntermissionTemplateBox" Margin="0,0,0,4" Padding="6,4" TextWrapping="Wrap"/>
+
+                <Button x:Name="ResetDefaultsButton" Content="Reset templates to default"
+                        Click="ResetDefaults_Click" HorizontalAlignment="Left"
+                        Margin="0,4,0,16" Padding="8,4"/>
+
+                <TextBlock Text="Available keys" Foreground="#E8EAF0" FontSize="14" FontWeight="Bold" Margin="0,0,0,6"/>
+                <Border Background="#1C1C22" CornerRadius="6" Padding="10">
+                    <ItemsControl x:Name="KeysList"/>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+            <Button Content="Cancel" Click="Cancel_Click" Margin="0,0,10,0" Padding="16,5"/>
+            <Button Content="Save" Click="Save_Click" Padding="16,5" IsDefault="True" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</Window>

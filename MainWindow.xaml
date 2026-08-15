@@ -1,0 +1,149 @@
+<Window x:Class="EclipticaOverlay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ecliptica Overlay"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="Manual"
+        Left="40" Top="40"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
+    <Border Background="#DD101014"
+            BorderBrush="#33FFFFFF"
+            BorderThickness="1"
+            CornerRadius="10"
+            Padding="16,12"
+            Width="300">
+        <StackPanel>
+
+            <!-- Header -->
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Ellipse x:Name="ConnectionDot" Grid.Column="0" Width="8" Height="8"
+                         Fill="#666" VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Column="1" Text="ECLIPTICA" Margin="8,0,0,0"
+                           Foreground="#AAB0C0" FontSize="11" FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+
+                <TextBlock x:Name="ChatboxToggle" Grid.Column="2" Text="&#x1F4AC;"
+                           Foreground="#777" FontSize="12" Cursor="Hand" Margin="0,0,8,0"
+                           ToolTip="Send status to VRChat chatbox (OSC) — click to toggle"
+                           PreviewMouseLeftButtonDown="ChatboxToggle_PreviewMouseLeftButtonDown"/>
+
+                <TextBlock x:Name="SettingsButton" Grid.Column="3" Text="&#x2699;"
+                           Foreground="#777" FontSize="12" Cursor="Hand" Margin="0,0,10,0"
+                           ToolTip="Chatbox settings"
+                           PreviewMouseLeftButtonDown="SettingsButton_PreviewMouseLeftButtonDown"/>
+
+                <TextBlock x:Name="CloseButton" Grid.Column="4" Text="&#x2715;"
+                           Foreground="#777" FontSize="11" Cursor="Hand"
+                           PreviewMouseLeftButtonDown="CloseButton_PreviewMouseLeftButtonDown"/>
+            </Grid>
+
+            <!-- Status -->
+            <TextBlock x:Name="StatusText" Text="CONNECTING..."
+                       Foreground="#AAB0C0" FontSize="20" FontWeight="Bold"
+                       Margin="0,0,0,2"/>
+
+            <!-- Stage / boss name -->
+            <TextBlock x:Name="DetailText" Text=""
+                       Foreground="#E8EAF0" FontSize="14"
+                       TextWrapping="Wrap"
+                       Margin="0,0,0,8"/>
+
+            <!-- Progress -->
+            <Grid x:Name="ProgressRow" Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border x:Name="ProgressTrack" Grid.Column="0" Height="6" CornerRadius="3" Background="#2A2A32"
+                        VerticalAlignment="Center" Margin="0,0,8,0">
+                    <Border x:Name="ProgressFill" HorizontalAlignment="Left"
+                            Height="6" CornerRadius="3" Background="#5AA9E6" Width="0"/>
+                </Border>
+                <TextBlock x:Name="ProgressLabel" Grid.Column="1" Text="0%"
+                           Foreground="#8A90A0" FontSize="11" VerticalAlignment="Center"/>
+            </Grid>
+
+            <!-- Boss wiki reference -->
+            <StackPanel x:Name="BossInfoBox" Margin="0,0,0,8">
+                <TextBlock x:Name="BossTitleText" Text=""
+                           Foreground="#9AA0B0" FontSize="11" FontStyle="Italic"/>
+                <TextBlock x:Name="BossStatsText" Text=""
+                           Foreground="#6A7080" FontSize="10.5" Margin="0,1,0,0"/>
+                <TextBlock x:Name="BossAffinityText"
+                           TextWrapping="Wrap" FontSize="10.5" Margin="0,1,0,0"/>
+                <TextBlock x:Name="BossPhaseTriggerText" Text=""
+                           Foreground="#E5A93C" FontSize="10.5" FontWeight="Bold"
+                           TextWrapping="Wrap" Margin="0,3,0,0"/>
+                <TextBlock x:Name="BossStrategyText" Text=""
+                           Foreground="#7A8090" FontSize="10.5" TextWrapping="Wrap" Margin="0,2,0,0"/>
+            </StackPanel>
+
+            <!-- Boss aggro -->
+            <Border x:Name="AggroBox" Background="#22E5555F" CornerRadius="6"
+                    Padding="8,5" Margin="0,0,0,8">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="AGGRO " Foreground="#E5555F" FontSize="11" FontWeight="Bold"/>
+                    <TextBlock x:Name="AggroText" Text="" Foreground="#E8EAF0" FontSize="12"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Other tracked enemies' aggro -->
+            <TextBlock x:Name="OtherAggroText" Text=""
+                       Foreground="#7A8090" FontSize="10.5"
+                       TextWrapping="Wrap"
+                       Margin="0,0,0,8"/>
+
+            <!-- Boss kill toast -->
+            <Border x:Name="KillToast" Background="#224CC38A" CornerRadius="6"
+                    Padding="8,5" Margin="0,0,0,8">
+                <TextBlock x:Name="KillToastText" Text=""
+                           Foreground="#4CC38A" FontSize="11.5" TextWrapping="Wrap"/>
+            </Border>
+
+            <!-- Combat stats -->
+            <Grid Margin="0,0,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="DEALT" Foreground="#6A7080" FontSize="9.5"/>
+                    <TextBlock x:Name="DealtText" Text="0" Foreground="#8FD6B4" FontSize="15" FontWeight="Bold"/>
+                    <TextBlock x:Name="DealtBreakdownText" Text="" Foreground="#6A7080" FontSize="9.5"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="TAKEN" Foreground="#6A7080" FontSize="9.5"/>
+                    <TextBlock x:Name="TakenText" Text="0" Foreground="#E58A8A" FontSize="15" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock x:Name="LastHitText" Text=""
+                       Foreground="#7A8090" FontSize="10.5"
+                       Margin="0,0,0,8"/>
+
+            <!-- Footer info -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="ClassText" Text="" Foreground="#8A90A0" FontSize="11"/>
+                <TextBlock x:Name="ElapsedText" Text="" Foreground="#8A90A0" FontSize="11" Margin="10,0,0,0"/>
+                <TextBlock x:Name="SessionText" Text="" Foreground="#8A90A0" FontSize="11" Margin="10,0,0,0"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</Window>
