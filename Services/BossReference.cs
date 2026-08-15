@@ -205,6 +205,59 @@ public static class BossReference
             "Most fireballs now leave a puddle of fire on the ground, and the jump attack leaves a growing fire pillar — the arena becomes largely untraversable up close.",
             WeakTo: "Frost, Shadow", ResistTo: "Fire, Luminous"),
 
+        // Player-verified (matches the prior best-guess key exactly; "BraveraPhase2" is a separate name).
+        ["Bravera"] = new BossInfo(
+            "The Opton Commander", "Physical / Electric", 2,
+            "Spawns with 2 Opton Guards that harass the lobby's lowest-HP player (not required to be killed). At 50% HP unlocks a long-range Corkscrew Leap that ends in a powerful single-strike Pizza-cutter.",
+            PhaseTrigger: "Corkscrew Leap + Pizza-cutter unlock at 50% HP",
+            WeakTo: "Fire, Poison", ResistTo: "Frost, Electric, Luminous"),
+
+        ["BraveraPhase2"] = new BossInfo(
+            "The Opton Commander (Phase 2)", "Physical / Electric", 2,
+            "Much more agile moveset — intense melee combos plus a sprint, making him hard to escape without teammate support. At 50% HP, his Pizza-cutter is enhanced to strike twice and can be used at any point (not just ending a lunge).",
+            PhaseTrigger: "Enhanced double-strike Pizza-cutter at 50% HP",
+            WeakTo: "Fire, Poison", ResistTo: "Frost, Electric, Luminous"),
+
+        // Player-verified (matches the prior best-guess key exactly). "ConeHeadPhase2" is a
+        // separate name.
+        ["ConeHead"] = new BossInfo(
+            "The Urban Samurai", "Physical", 2,
+            "Uses one of his three swords; traffic-light gimmick (move on green, stop on red) — his big AOE covers most of the battlefield and is devastating if not followed correctly. May teleport behind opponents.",
+            PhaseTrigger: "Disarmed (melee-only sub-phase) at 30% HP; phase 2 begins once defeated",
+            WeakTo: "Shadow", ResistTo: "Luminous"),
+
+        ["ConeHeadPhase2"] = new BossInfo(
+            "The Urban Samurai (Phase 2)", "Physical", 2,
+            "Unsheathes his remaining 2 swords. Each slash is now red or green (dodge by stopping or moving respectively); his big AOE now strikes 3 times, forcing you to track the order of colors.",
+            WeakTo: "Shadow", ResistTo: "Luminous"),
+
+        // Player-verified (matches the prior best-guess key exactly). "MephielPhase2" is a
+        // separate name.
+        ["Mephiel"] = new BossInfo(
+            "The Treacherous", "Shadow", 2,
+            "Bullet-hell style, covering swathes of the arena in hazards. Has a powerful rotating 'pizza cutter' sweep requiring you to rotate around it.",
+            WeakTo: "Luminous", ResistTo: "Electric"),
+
+        ["MephielPhase2"] = new BossInfo(
+            "The Treacherous (Phase 2)", "Shadow", 2,
+            "Gains flight — a period more focused on survival than damage. Moveset is greatly expanded and prior moves (including the rotating 'pizza cutter') are enhanced.",
+            WeakTo: "Luminous", ResistTo: "Electric"),
+
+        // Player-verified: internal name is "Obisidus" (wiki page "Irides", the Crystalline
+        // Prototype). "IdolIridis" is his spawn-in appearance, not a separate fight/phase name.
+        // Logs "ObisidusPhase2" separately for phase 2.
+        ["Obisidus"] = new BossInfo(
+            "The Crystalline Prototype", "Physical / Electric / Luminous / Shadow", 2,
+            "Fast-paced entourage of attacks: slashes, projectiles, and piercing dashes that go through defenses.",
+            PhaseTrigger: "Death of phase 1 triggers phase 2 (not %-based)",
+            WeakTo: "Physical, Frost", ResistTo: "Fire, Luminous"),
+
+        ["ObisidusPhase2"] = new BossInfo(
+            "The Crystalline Prototype (Phase 2)", "Physical / Electric / Luminous / Shadow", 2,
+            "More speed and an expanded moveset: large lightning bolts, light projectiles, and a thunderous piercing stomp. Below 50% HP, summons 3 ground crystals and becomes fully invincible while they're active — each crystal targets a nearby player (shown by lightning arcing to them), and only that player can damage it; crystals can also charge into a spike attack everyone must jump over. Can happen up to 3 times per fight.",
+            PhaseTrigger: "Invincible crystal phase below 50% HP (up to 3 times)",
+            WeakTo: "Physical, Frost", ResistTo: "Fire, Luminous"),
+
         // Log-confirmed (matches the prior best-guess key exactly).
         ["GoldenGrouch"] = new BossInfo(
             "The Forever Trapped", "Physical / Shadow", 2,
@@ -223,23 +276,6 @@ public static class BossReference
             PhaseTrigger: "Self-buffs around 40% HP",
             WeakTo: "Electric, Shadow", ResistTo: "Luminous"),
 
-        ["ConeHead"] = new BossInfo(
-            "The Urban Samurai", "Physical", 2,
-            "Traffic-light gimmick — move on green, stop on red. Phase 2 adds 2 more color-coded swords.",
-            PhaseTrigger: "Disarmed (melee sub-phase) at 30% HP",
-            WeakTo: "Shadow", ResistTo: "Luminous"),
-
-        ["Mephiel"] = new BossInfo(
-            "The Treacherous", "Shadow", 2,
-            "Bullet-hell arena hazards; phase 2 grants flight and a spinning 'pizza cutter' sweep.",
-            WeakTo: "Luminous", ResistTo: "Electric"),
-
-        ["Irides"] = new BossInfo(
-            "The Crystalline Prototype", "Physical / Electric / Luminous / Shadow", 2,
-            "Phase 2 adds lightning/light attacks; below 50% HP summons 3 crystals that make it invincible — only their target can damage them.",
-            PhaseTrigger: "Invincible crystals summoned below 50% HP",
-            WeakTo: "Physical, Frost", ResistTo: "Fire, Luminous"),
-
         ["Abaddon"] = new BossInfo(
             "Demon of Destruction", "Physical / Shadow", 2,
             "Summons Elder Manalyte adds (3, then 6 in phase 2); AOE fire pillars and decay orbs, phase-2 attacks pierce defense.",
@@ -250,12 +286,6 @@ public static class BossReference
             "Flying boss with ice AOEs and dashes; becomes far more aggressive with bigger piercing ice blasts below 50% HP.",
             PhaseTrigger: "More aggressive below 50% HP",
             WeakTo: "Fire, Luminous", ResistTo: "Frost, Electric, Shadow"),
-
-        ["Bravera"] = new BossInfo(
-            "The Opton Commander", "Physical / Electric", 2,
-            "Spawns 2 guards that harass the lowest-HP player; unlocks a leap and a 'pizza cutter' at 50% HP each phase.",
-            PhaseTrigger: "New move at 50% HP each phase",
-            WeakTo: "Fire, Poison", ResistTo: "Frost, Electric, Luminous"),
 
         ["NeoPilot"] = new BossInfo(
             "Empress of FOX", "Physical / Electric", 2,
